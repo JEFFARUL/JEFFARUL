@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard with Sample Graph</title>
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .sidebar {
+    position: fixed;
+    width: 200px;
+    height: 100%;
+    background-color: #333;
+    padding-top: 20px;
+    color: #fff;
+  }
+  
+  .sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar li {
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar li:hover {
+    background-color: #555;
+  }
+  
+  .main-content {
+    margin-left: 200px;
+    padding: 20px;
+  }
+
+  canvas {
+    max-width: 400px; /* Adjust the max width of the canvas */
+    margin-bottom: 20px; /* Add margin between charts */
+  }
+</style>
+</head>
+<body>
+
+<div class="sidebar">
+  <ul>
+    <li onclick="showPage('dashboard')">RYDIGITAL</li>
+    <li onclick="showPage('dashboard')">Home</li>
+    <li onclick="showPage('reports')">Reports</li>
+    <li onclick="showPage('settings')">Settings</li>
+  </ul>
+</div>
+
+<div class="main-content">
+  <div id="dashboard" style="display: block;">
+    <!-- Dashboard content goes here -->
+    <h2>RYDIGI</h2>
+    <!-- Sample graph -->
+    <canvas id="myChart" width="400" height="100"></canvas>
+  </div>
+  <div id="reports" style="display: none;">
+    <!-- Reports content goes here -->
+    <h2>Reports</h2>
+    <p>View your reports here.</p>
+  </div>
+  <div id="settings" style="display: none;">
+    <!-- Settings content goes here -->
+    <h2>Settings</h2>
+    <p>Adjust your settings here.</p>
+  </div>
+</div>
+
+<script>
+  function showPage(pageId) {
+    // Hide all pages
+    var pages = document.querySelectorAll('.main-content > div');
+    pages.forEach(function(page) {
+      page.style.display = 'none';
+    });
+    document.getElementById(pageId).style.display = 'block';
+  }
+  var data = {
+    labels: ['september', 'october', 'november', 'december', 'january'],
+    datasets: [{
+      label: 'OLDvsNEW',
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      borderWidth: 1,
+      data: [65, 59, 80, 75, 56]
+    }]
+  };
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
